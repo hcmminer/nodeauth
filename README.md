@@ -19,3 +19,4 @@ nodejs by building 12 project
 # express
 > npm install -g express // global express
 > npm install -g express-generator
+> express // create a template of express folders
