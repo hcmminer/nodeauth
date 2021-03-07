@@ -18,3 +18,4 @@ nodejs by building 12 project
 * > db.users.remove({name: 'dang van ban'}) 
 # express
 > npm install -g express // global express
+> npm install -g express-generator
