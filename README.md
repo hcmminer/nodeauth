@@ -16,3 +16,5 @@ nodejs by building 12 project
 * > db.users.find().pretty() // xem đẹp hơn
 * > db.users.update({username: 'hcmminer'},{$set: {email: 'vanbanok@gmail.com'}}) // nếu không có $set thì mọi thứ khác sẽ bị xóa rất nguy hiểm
 * > db.users.remove({name: 'dang van ban'}) 
+# express
+> npm install -g express // global express
