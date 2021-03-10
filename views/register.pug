@@ -1,0 +1,28 @@
+extends layout 
+block content
+    h1 Register
+    p Please register using the form below
+    form(method='post', action='/users/resgister',enctype="multipart/form-data")
+        .mb-3
+        label.form-label(for='exampleFormControlInput1') Name
+        input#exampleFormControlInput1.form-control(type='text', placeholder='name')
+        .mb-3
+        label.form-label(for='exampleFormControlInput1') Email address
+        input#exampleFormControlInput1.form-control(type='email', placeholder='name@example.com')
+        .mb-3
+        label.form-label(for='exampleFormControlInput1') User name
+        input#exampleFormControlInput1.form-control(type='text', placeholder='name@example.com')
+        .mb-3
+        label.form-label(for='exampleFormControlInput1') Password
+        input#exampleFormControlInput1.form-control(type='password', placeholder='name@example.com')
+        .mb-3
+        label.form-label(for='exampleFormControlInput1') Confirm Password
+        input#exampleFormControlInput1.form-control(type='password', placeholder='name@example.com')
+        .mb-3
+        label.form-label(for='exampleFormControlInput1') Avatar
+        input#exampleFormControlInput1.form-control(type='file', placeholder='name@example.com')
+        .mb-3
+        .col-12
+        button.btn.btn-primary(type='submit') Register
+
+    

@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Document
+    link(href='/stylesheets/bootstrap.css',rel="stylesheet")
+    link(href='/style.css')
+  body
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      .container-fluid
+        a.navbar-brand(href='#') SPACE-X
+        button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarTogglerDemo02', aria-controls='navbarTogglerDemo02', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarTogglerDemo02.collapse.navbar-collapse
+          ul.navbar-nav.me-auto.mb-lg-2
+            li.nav-item
+              a.nav-link(href='/') Members
+            li.nav-item
+              a.nav-link(href='/users/register',class=(title=="register" ? "active text-primary" : "")) Register
+            li.nav-item
+              a.nav-link(href='/users/login',class=(title=="login" ? "active text-primary" : "")) Login
+          form.d-flex
+            ul.navbar-nav.mb-lg-2
+              li.nav-item
+              a.nav-link(href='/users/logout',class=(title=="logout" ? "active text-primary" : "")) Logout
+    .container 
+      block content
+    script(src='/javascripts/bootstrap.bundle.js')
+    
+  
