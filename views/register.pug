@@ -1,7 +1,9 @@
 extends layout 
 block content
-    h1 Register
+    h1 Register #{a} #{b}
     p Please register using the form below
+    each err in errors 
+        div=err.msg
     form(method='POST', action='/users/register',enctype="multipart/form-data")
         .mb-3
         label.form-label(for='exampleFormControlInput1') Name

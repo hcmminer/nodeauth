@@ -34,19 +34,17 @@ const { check, validationResult } = require("express-validator");
 router.post(
 	"/register",
 	upload.single("singlefileupload"),
+	check("username").notEmpty(),
+	check("password").isLength({ min: 5 }),
+	check("name").notEmpty(),
+	check("email").isEmail(),
+	check("password2").custom((value, { req }) => value == req.body.password),
 	async (req, res, next) => {
-		await check("username").notEmpty();
-		await check("password").isLength({ min: 5 });
-		await check("name").notEmpty();
-		await check("email").isEmail();
-		await check("password2").custom(
-			(value, { req }) => value == req.body.password
-		);
-
 		// Finds the validation errors in this request and wraps them in an object with handy functions
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			return res.status(400).json({ errors: errors.array() });
+			// return res.status(400).json({ errors: errors.array() });
+			res.render("register",{a: "AAAA",b:"BBB",errors: errors.array()});
 		}
 		// save data to databases
 		await User.create({

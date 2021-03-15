@@ -26,11 +26,6 @@ html(lang="en")
               li.nav-item
               a.nav-link(href='/users/logout',class=(title=="logout" ? "active text-primary" : "")) Logout
     .container
-      if errors 
-        ul
-          each error in errors 
-            li #{error}
-          
       block content
     script(src='/javascripts/bootstrap.bundle.js')
     
