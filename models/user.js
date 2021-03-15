@@ -1,7 +1,7 @@
 // MONGOOSE
 const mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost:27017/nodeauth', {useNewUrlParser: true});
-mongoose.connection;
+
 // User Schema
 const UserSchema = new mongoose.Schema({
 	username: {
@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
 	},
 });
 
-const User = mongoose.model("Try", UserSchema);
+const User = mongoose.model("user", UserSchema);
 
 module.exports = User;
 
