@@ -4,7 +4,7 @@ block content
     p Please register using the form below
     if errors
         each err in errors 
-            div=err.msg
+            div.alert.alert-danger=err.msg,err
     form(method='POST', action='/users/register',enctype="multipart/form-data")
         .mb-3
         label.form-label(for='exampleFormControlInput1') Name
@@ -28,4 +28,3 @@ block content
         .col-12
         button.btn.btn-primary(type='submit',name='submit') Register
 
-    

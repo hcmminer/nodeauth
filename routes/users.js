@@ -1,5 +1,7 @@
-// ROUTER
+// EXPRESS
 const express = require("express");
+
+// ROUTER
 const router = express.Router();
 
 // UPLOAD BY MULTER
@@ -28,22 +30,26 @@ router.get("/register", function (req, res, next) {
 		title: "register",
 	});
 });
+
 // ...rest of the initial code omitted for simplicity.
 const { check, validationResult } = require("express-validator");
 
 router.post(
 	"/register",
 	upload.single("singlefileupload"),
-	check("username").notEmpty(),
-	check("password").isLength({ min: 5 }),
-	check("name").notEmpty(),
-	check("email").isEmail(),
-	check("password2").custom((value, { req }) => value == req.body.password),
+	check("username", "username do not exits").notEmpty(),
+	check("password", "password at least 5 character").isLength({ min: 5 }),
+	check("name", "name is not empty").notEmpty(),
+	check("email", "do not use spam email").isEmail(),
+	check("password2", "do not use common word as the password").custom(
+		(value, { req }) => value == req.body.password
+	),
 	async (req, res, next) => {
 		// Finds the validation errors in this request and wraps them in an object with handy functions
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			res.render("register",{a: "AAAA",b:"BBB",errors: errors.array()});
+			res.render("register", { a: "AAAA", b: "BBB", errors: errors.array() });
+			return;
 		}
 		// save data to databases
 		await User.create({
@@ -53,7 +59,6 @@ router.post(
 			email: req.body.email,
 			profileimage: JSON.stringify(req.file.path),
 		});
-		res.location("/");
 		res.redirect("/");
 	}
 );

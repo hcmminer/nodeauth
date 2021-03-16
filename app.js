@@ -1,3 +1,6 @@
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+
 //EXPRESS
 const express = require("express");
 const app = express();
@@ -8,7 +11,19 @@ const path = require("path");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-// COOKIE PARSE
+// SESSION-EXPRESS
+const session = require("express-session");
+app.set("trust proxy", 1); // trust first proxy
+app.use(
+	session({
+		secret: "keyboard cat",
+		resave: false,
+		saveUninitialized: true,
+		cookie: { secure: true },
+	})
+);
+
+// COOKIE PARSE AFTER SESSION
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
@@ -19,13 +34,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-// UPLOAD
-// const multer = require("multer");
-// const upload = multer({ dest: "./uploads" });
-
 // ROUTER
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
