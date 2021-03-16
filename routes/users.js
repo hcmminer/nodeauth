@@ -59,7 +59,7 @@ router.post(
 			email: req.body.email,
 			profileimage: JSON.stringify(req.file.path),
 		});
-		res.redirect("/");
+		res.render("index",{message: "you have been registered and can login now"});
 	}
 );
 

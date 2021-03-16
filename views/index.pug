@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  if message
+    div.alert.alert-success=message
   h1 Members Area 
   p Welcome to the members area
   
