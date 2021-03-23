@@ -1,6 +1,8 @@
 // MONGOOSE
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost:27017/nodeauth', {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/nodeauth", {
+	useNewUrlParser: true,
+});
 
 // User Schema
 const UserSchema = new mongoose.Schema({
@@ -26,4 +28,6 @@ const User = mongoose.model("user", UserSchema);
 
 module.exports = User;
 
-
+module.exports.createUser = (newUser, callback) => {
+	User.create(newUser,callback);
+};

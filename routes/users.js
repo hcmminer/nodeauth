@@ -44,22 +44,31 @@ router.post(
 	check("password2", "do not use common word as the password").custom(
 		(value, { req }) => value == req.body.password
 	),
-	async (req, res, next) => {
+	(req, res, next) => {
 		// Finds the validation errors in this request and wraps them in an object with handy functions
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			res.render("register", { a: "AAAA", b: "BBB", errors: errors.array() });
 			return;
 		}
-		// save data to databases
-		await User.create({
+
+		// CREATE USER AND SAVE TO DATABASES
+		const newUser = new User({
 			username: req.body.username,
 			password: req.body.password,
 			name: req.body.name,
 			email: req.body.email,
 			profileimage: JSON.stringify(req.file.path),
 		});
-		res.render("index",{message: "you have been registered and can login now"});
+
+		User.createUser(newUser, function (err, user) {
+			if (err) throw err;
+			console.log(user);
+		});
+
+		res.render("index", {
+			message: "you have been registered and can login now",
+		});
 	}
 );
 
