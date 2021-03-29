@@ -1,3 +1,7 @@
+// passport
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+
 // EXPRESS
 const express = require("express");
 
@@ -20,6 +24,52 @@ router.get("/login", function (req, res, next) {
 		title: "login",
 	});
 });
+
+// login with passport
+router.post("/login", passport.authenticate("local"), function (req, res) {
+	res.redirect("/");
+});
+
+// passport local stragegy
+passport.use(
+	new LocalStrategy((username, password, done) => {
+		User.getUserByUsername(username, function (err, user) {
+			if (err) {
+				return done(err);
+			}
+			if (!user) {
+				return done(null, false, { message: "Incorrect username." });
+			}
+
+			User.comparePassword(password, user.password, (err, isMatch) => {
+				console.log("kiem tra mat khau", isMatch, err, password, user.password);
+				if (err) {
+					return done(err);
+				}
+				if (isMatch) {
+					return done(null, user);
+				} else {
+					console.log("Invalid Password");
+					return done(null, false, { message: "Invalid Password" });
+				}
+			});
+			// console.log("ko chay tiep den day neu den day neu mk sai");
+			// return done(null, user);
+		});
+	})
+);
+
+// session
+passport.serializeUser(function (user, done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+	User.getUserById(id, function (err, user) {
+		done(err, user);
+	});
+});
+
 router.get("/logout", function (req, res, next) {
 	res.render("logout", {
 		title: "logout",
