@@ -70,11 +70,6 @@ passport.deserializeUser(function (id, done) {
 	});
 });
 
-router.get("/logout", function (req, res, next) {
-	res.render("logout", {
-		title: "logout",
-	});
-});
 router.get("/register", function (req, res, next) {
 	res.render("register", {
 		title: "register",
@@ -121,5 +116,11 @@ router.post(
 		});
 	}
 );
+
+// logout
+router.get("/logout", (req, res, next) => {
+	req.logout();
+	res.redirect("/users/login");
+});
 
 module.exports = router;

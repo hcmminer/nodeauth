@@ -20,7 +20,7 @@ app.use(
 		secret: "keyboard cat",
 		resave: false,
 		saveUninitialized: true,
-		cookie: { secure: true },
+		// cookie: { secure: true }, // nếu bật lên thì không thể dùng req.isAuthenticated
 	})
 );
 
@@ -31,8 +31,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-// passport init
+// passport init BEFORE SESSION !!!!
 app.use(passport.initialize());
+app.use(passport.session());
 
 // ROUTER
 
