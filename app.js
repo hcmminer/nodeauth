@@ -34,9 +34,13 @@ app.use(bodyParser.json());
 // passport init BEFORE SESSION !!!!
 app.use(passport.initialize());
 app.use(passport.session());
+//
+app.get("*", (req, res, next) => {
+	res.locals.user = req.user || null;// user is a var in local range when every a request send up
+	next();
+});
 
 // ROUTER
-
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
